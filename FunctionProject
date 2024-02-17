@@ -1,5 +1,5 @@
 import javax.swing.JOptionPane; 
-public class Proj_3
+public class FunctionProject
 { 
 
   public static int parseInt(String s) 
