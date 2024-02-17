@@ -1,0 +1,67 @@
+import javax.swing.JOptionPane; 
+public class Proj_3
+{ 
+
+  public static int parseInt(String s) 
+  { if(s.equals("0"))
+    { return 0;}
+  
+    if(s.charAt(0)=='0')
+    { System.out.println("Invalid expression, try again.");
+      System.exit(0);}
+      
+    int sum=0;
+    int p=1;
+    for (int i = s.length()-1; i >= 0; i--)
+    { if(Character.isDigit(s.charAt(i)))
+      { int num = s.charAt(i) - '0';
+        sum=sum+num*p;
+        p = p*10; }
+      else
+      { System.out.println("Invalid expression, try again.");
+        System.exit(0);}
+    }
+    return sum;
+  }
+ 
+  //evals expression
+  public static int eval(String ex)
+  { int add=0, sub=0, mul=0, div=0, par=0;
+    
+    for(int i=0;ex.length()>i;i++)
+    { if(ex.charAt(i)=='(')
+      { par++;}
+        { if(ex.charAt(i)==')')
+        { par--;}
+           { if(par==0)
+               { if(ex.charAt(i)=='+')
+                    { add=i;}
+                   { if(ex.charAt(i)=='-')
+                        { sub=i;}
+                        { if(ex.charAt(i)=='*')
+                             { mul=i;}
+                             { if(ex.charAt(i)=='/')
+                                  { div=i;}
+    }}}}}}}
+    if(add>0)
+    { return eval(ex.substring(0,add)) + eval(ex.substring(add+1));}
+    else
+    { if(sub>0)
+      { return eval(ex.substring(0,sub)) - eval(ex.substring(sub+1));}
+      else
+      { if(mul>0)
+        { return eval(ex.substring(0,mul)) * eval(ex.substring(mul+1));}
+        else
+        { if(div>0)
+          { return eval(ex.substring(0,div)) / eval(ex.substring(div+1));}
+          else
+          { if(ex.charAt(0)=='(')
+            { return eval(ex.substring(1, ex.length()-1));}
+            else
+            { return parseInt(ex);}
+  }}}}}
+  public static void main(String[] args)
+  { String ex =  JOptionPane.showInputDialog("Enter Expression");
+   System.out.println(eval(ex));
+  }
+}
